@@ -12,6 +12,8 @@ enum custom_keys {
     KC_AP_LED_ON = AP2_SAFE_RANGE,
     KC_AP_LED_OFF,
     GG_END_SEMICOLON,
+    CTL_LEFT,
+    CTL_RIGHT,
     GG_EZ,
 };
 /*
@@ -59,16 +61,16 @@ enum custom_keys {
   * |-----------------------------------------------------------------------------------------+
   * | Shift      |V-UP |V-DWN|MUTE |  v  |  b  |  n  |  m  |  ,  |INSRT| DEL |    Shift       |
   * |-----------------------------------------------------------------------------------------+
-  * | Ctrl  |  L1   |CTL FN1|               space             |  Alt  |  FN1  |  FN2  | Ctrl  |
+  * | Ctrl  |  L1   |  Alt  |               space             |  Alt  |  FN1  |  FN2  | Ctrl  |
   * \-----------------------------------------------------------------------------------------/
   *
   */
  [_FN1_LAYER] = KEYMAP( /* Base */
     KC_GRV, KC_F1, KC_F2, KC_F3, KC_F4, KC_F5, KC_F6, KC_F7, KC_F8, KC_F9, KC_F10, KC_F11, KC_F12, KC_DEL,
     MO(_FN2_LAYER), KC_TRNS, KC_UP, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_UP, KC_TRNS, KC_PSCR, KC_HOME, KC_END, KC_TRNS,
-    KC_TRNS, KC_LEFT, KC_DOWN, KC_RGHT, KC_TRNS, KC_TRNS, KC_TRNS, KC_LEFT, KC_DOWN, KC_RGHT, KC_PGUP, KC_PGDN, GG_END_SEMICOLON,
+    KC_TRNS, KC_LEFT, KC_DOWN, KC_RGHT, KC_TRNS, KC_TRNS, KC_TRNS, CTL_LEFT, KC_DOWN, CTL_RIGHT, KC_PGUP, KC_PGDN, GG_END_SEMICOLON,
     KC_CAPS, KC_VOLU, KC_VOLD, KC_MUTE, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_INS, KC_DEL, KC_TRNS,
-    KC_TRNS, KC_TRNS, LM(_FN1_LAYER, MOD_LCTL), KC_TRNS, KC_TRNS, KC_TRNS, MO(_FN2_LAYER), KC_TRNS
+    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, MO(_FN2_LAYER), KC_TRNS
 ),
   /*
   * Layer _FN2_LAYER
@@ -123,6 +125,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case GG_END_SEMICOLON:
             if (record->event.pressed)
                 SEND_STRING(SS_TAP(X_END)";");
+            break;
+        case CTL_LEFT:
+            if (record->event.pressed)
+                SEND_STRING(SS_DOWN(X_LCTL) SS_TAP(X_LEFT) SS_UP(X_LCTL));
+            break;
+        case CTL_RIGHT:
+            if (record->event.pressed)
+                SEND_STRING(SS_DOWN(X_LCTL) SS_TAP(X_RIGHT) SS_UP(X_LCTL));
             break;
         case GG_EZ:
             if (record->event.pressed)
