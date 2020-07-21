@@ -73,6 +73,16 @@ bool OVERRIDE led_update_kb(led_t status) {
     return led_update_user(status);
 }
 
+void annepro2LedLayer1On(void)
+{
+    sdPut(&SD0, CMD_LAYER_1_ON);
+}
+
+void annepro2LedLayer1Off(void)
+{
+    sdPut(&SD0, CMD_LAYER_1_OFF);
+}
+
 /*!
  * @returns false   processing for this keycode has been completed.
  */

@@ -37,3 +37,5 @@ void annepro2LedDisable(void);
 void annepro2LedEnable(void);
 void annepro2LedUpdate(uint8_t row, uint8_t col);
 void annepro2LedUpdateRow(uint8_t row);
+void annepro2LedLayer1On(void);
+void annepro2LedLayer1Off(void);

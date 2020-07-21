@@ -1,12 +1,11 @@
 #include <stdint.h>
 #include "annepro2.h"
 
-#define TAPPING_TOGGLE 3
-
 enum anne_pro_layers {
   _BASE_LAYER,
   _FN1_LAYER,
   _FN2_LAYER,
+  _KEYPAD,
 };
 enum custom_keys {
     KC_AP_LED_ON = AP2_SAFE_RANGE,
@@ -55,7 +54,7 @@ enum custom_keys {
   * ,-----------------------------------------------------------------------------------------.
   * |  `  |  F1 |  F2 |  F3 |  F4 |  F5 |  F6 |  F7 |  F8 |  F9 | F10 | F11 | F12 |  DELETE   |
   * |-----------------------------------------------------------------------------------------+
-  * | FN2    |  q  | UP  |  e  |  r  |  t  |  y  |  u  |  UP |  o  | PS | HOME | END |   \    |
+  * | KEYPADL|  q  | UP  |  e  |  r  |  t  |  y  |  u  |  UP |  o  | PS | HOME | END |   \    |
   * |-----------------------------------------------------------------------------------------+
   * | FN1     |LEFT |DOWN |RIGHT|  f  |  g  |  h  | LEFT|DOWN |RIGHT| PGUP|PGDN |END+SEMICOLON|
   * |-----------------------------------------------------------------------------------------+
@@ -67,7 +66,7 @@ enum custom_keys {
   */
  [_FN1_LAYER] = KEYMAP( /* Base */
     KC_GRV, KC_F1, KC_F2, KC_F3, KC_F4, KC_F5, KC_F6, KC_F7, KC_F8, KC_F9, KC_F10, KC_F11, KC_F12, KC_DEL,
-    MO(_FN2_LAYER), KC_TRNS, KC_UP, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_UP, KC_TRNS, KC_PSCR, KC_HOME, KC_END, KC_TRNS,
+    TT(_KEYPAD), KC_TRNS, KC_UP, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_UP, KC_TRNS, KC_PSCR, KC_HOME, KC_END, KC_TRNS,
     KC_TRNS, KC_LEFT, KC_DOWN, KC_RGHT, KC_TRNS, KC_TRNS, KC_TRNS, CTL_LEFT, KC_DOWN, CTL_RIGHT, KC_PGUP, KC_PGDN, GG_END_SEMICOLON,
     KC_CAPS, KC_VOLU, KC_VOLD, KC_MUTE, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_INS, KC_DEL, KC_TRNS,
     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, MO(_FN2_LAYER), KC_TRNS
@@ -94,7 +93,38 @@ enum custom_keys {
     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_MEDIA_PREV_TRACK, KC_VOLD, KC_VOLU, KC_MEDIA_NEXT_TRACK, KC_INS, KC_DEL, KC_TRNS,
     KC_TRNS, KC_TRNS, KC_TRNS, KC_MEDIA_PLAY_PAUSE, KC_TRNS, MO(_FN1_LAYER), MO(_FN2_LAYER), KC_TRNS
  ),
+/*
+* ,-----------------------------------------------------------------------------------------.
+* |     |     |     |     |     |     |     |     |     |     |     |     |     |   Bksp    |
+* |-----------------------------------------------------------------------------------------+
+* |        |     |     |     |     |     |     |  7  |  8  |  9  |  /  |     |     |        |
+* |-----------------------------------------------------------------------------------------+
+* |         |     |     |     |     |     |  .  |  4  |  5  |  6  |  *  |     | KEYP ENTER  |
+* |-----------------------------------------------------------------------------------------+
+* |            |     |     |     |     |  ,  |  1  |  2  |  3  |  -  |     |       =        |
+* |-----------------------------------------------------------------------------------------+
+* |       |       |       |                 0               |   +   |       | NLock |       |
+* \-----------------------------------------------------------------------------------------/
+*/
+ [_KEYPAD] = KEYMAP( /* KEYPAD */
+    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_BSPC,
+    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_KP_7, KC_KP_8, KC_KP_9, KC_KP_SLASH, KC_TRNS, KC_TRNS, KC_TRNS,
+    KC_TRNS, KC_TRNS, KC_TRNS, KC_RGHT, KC_TRNS, KC_TRNS, KC_KP_DOT, KC_KP_4, KC_KP_5, KC_KP_6, KC_KP_ASTERISK, KC_TRNS, KC_KP_ENTER,
+    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_KP_COMMA, KC_KP_1, KC_KP_2, KC_KP_3, KC_KP_MINUS, KC_TRNS, KC_KP_EQUAL,
+    KC_TRNS, KC_TRNS, KC_TRNS, KC_KP_0, KC_KP_PLUS, KC_TRNS, KC_NUMLOCK, KC_TRNS
+),
 };
+
+/* EMPTY LAYER
+ [_FN3_LAYER] = KEYMAP(
+    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+    KC_TRNS, KC_TRNS, KC_TRNS, KC_RGHT, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
+),
+*/
+
 const uint16_t keymaps_size = sizeof(keymaps);
 
 
@@ -105,8 +135,13 @@ void matrix_init_user(void) {
 void matrix_scan_user(void) {
 }
 
-layer_state_t layer_state_set_user(layer_state_t layer) {
-    return layer;
+layer_state_t layer_state_set_user(layer_state_t state) {
+    if(layer_state_cmp(state, _FN1_LAYER)) {
+        annepro2LedLayer1On();
+    }else {
+        annepro2LedLayer1Off();
+    }
+    return state;
 }
 
 /*!
