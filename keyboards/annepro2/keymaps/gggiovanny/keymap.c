@@ -136,10 +136,20 @@ void matrix_scan_user(void) {
 }
 
 layer_state_t layer_state_set_user(layer_state_t state) {
-    if(layer_state_cmp(state, _FN1_LAYER)) {
-        annepro2LedLayer1On();
-    }else {
-        annepro2LedLayer1Off();
+
+    switch (get_highest_layer(state)) {
+    case _FN1_LAYER:
+        annepro2LedLayerOn(1);
+        break;
+    case _FN2_LAYER:
+        annepro2LedLayerOn(2);
+        break;
+    case _KEYPAD:
+        annepro2LedLayerOn(3);
+        break;
+    default: //  for any other layers, or the default layer
+        annepro2LedLayerOff();
+        break;
     }
     return state;
 }
