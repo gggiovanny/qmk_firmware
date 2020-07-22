@@ -14,6 +14,7 @@ enum custom_keys {
     CTL_LEFT,
     CTL_RIGHT,
     GG_EZ,
+    ALT_Z,
 };
 /*
 * Layer _BASE_LAYER
@@ -56,7 +57,7 @@ enum custom_keys {
   * |-----------------------------------------------------------------------------------------+
   * | KEYPADL|  q  | UP  |  e  |  r  |  t  |  y  |  u  |  UP |  o  | PS | HOME | END |   \    |
   * |-----------------------------------------------------------------------------------------+
-  * | FN1     |LEFT |DOWN |RIGHT|  f  |  g  |  h  | LEFT|DOWN |RIGHT| PGUP|PGDN |END+SEMICOLON|
+  * | FN1     |LEFT |DOWN |RIGHT|ALT_Z|  g  |  h  | LEFT|DOWN |RIGHT| PGUP|PGDN |END+SEMICOLON|
   * |-----------------------------------------------------------------------------------------+
   * | Shift      |V-UP |V-DWN|MUTE |  v  |  b  |  n  |  m  |  ,  |INSRT| DEL |    Shift       |
   * |-----------------------------------------------------------------------------------------+
@@ -67,8 +68,8 @@ enum custom_keys {
  [_FN1_LAYER] = KEYMAP( /* Base */
     KC_GRV, KC_F1, KC_F2, KC_F3, KC_F4, KC_F5, KC_F6, KC_F7, KC_F8, KC_F9, KC_F10, KC_F11, KC_F12, KC_DEL,
     TT(_KEYPAD), KC_TRNS, KC_UP, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_UP, KC_TRNS, KC_PSCR, KC_HOME, KC_END, KC_TRNS,
-    KC_TRNS, KC_LEFT, KC_DOWN, KC_RGHT, KC_TRNS, KC_TRNS, KC_TRNS, CTL_LEFT, KC_DOWN, CTL_RIGHT, KC_PGUP, KC_PGDN, GG_END_SEMICOLON,
-    KC_CAPS, KC_VOLU, KC_VOLD, KC_MUTE, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_INS, KC_DEL, KC_TRNS,
+    KC_TRNS, KC_LEFT, KC_DOWN, KC_RGHT, ALT_Z, KC_TRNS, KC_TRNS, CTL_LEFT, KC_DOWN, CTL_RIGHT, KC_PGUP, KC_PGDN, GG_END_SEMICOLON,
+    KC_TRNS, KC_VOLU, KC_VOLD, KC_MUTE, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_INS, KC_DEL, KC_TRNS,
     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, MO(_FN2_LAYER), KC_TRNS
 ),
   /*
@@ -78,7 +79,7 @@ enum custom_keys {
   * |-----------------------------------------------------------------------------------------+
   * | FN2    |  q  | UP  |  e  |  r  |  t  |  y  |  u  |  UP |  o  | PS | HOME | END |   \    |
   * |-----------------------------------------------------------------------------------------+
-  * | FN1     |LEFT |DOWN |RIGHT|  f  |GG EZ|  h  |LEFT |DOWN |RIGHT| PGUP|PGDN |    Enter    |
+  * | CAPS    |LEFT |DOWN |RIGHT|  f  |GG EZ|  h  |LEFT |DOWN |RIGHT| PGUP|PGDN |    Enter    |
   * |-----------------------------------------------------------------------------------------+
   * | Shift      |  z  |  x  |  c  |  v  |PREVT|V-DWN| V-UP|NEXTT|INSRT| DEL |    Shift       |
   * |-----------------------------------------------------------------------------------------+
@@ -89,7 +90,7 @@ enum custom_keys {
  [_FN2_LAYER] = KEYMAP( /* Base */
     KC_TRNS, KC_AP2_BT1, KC_AP2_BT2, KC_AP2_BT3, KC_AP2_BT4, KC_NUMLOCK, KC_TRNS, KC_TRNS, KC_AP_LED_OFF, KC_AP_LED_ON, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
     MO(_FN2_LAYER), KC_TRNS, KC_UP, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_UP, KC_TRNS, KC_PSCR, KC_HOME, KC_END, KC_TRNS,
-    KC_TRNS, KC_LEFT, KC_DOWN, KC_RGHT, KC_TRNS, GG_EZ, KC_TRNS, KC_LEFT, KC_DOWN, KC_RGHT, KC_PGUP, KC_PGDN, KC_TRNS,
+    KC_CAPS, KC_LEFT, KC_DOWN, KC_RGHT, KC_TRNS, GG_EZ, KC_TRNS, KC_LEFT, KC_DOWN, KC_RGHT, KC_PGUP, KC_PGDN, KC_TRNS,
     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_MEDIA_PREV_TRACK, KC_VOLD, KC_VOLU, KC_MEDIA_NEXT_TRACK, KC_INS, KC_DEL, KC_TRNS,
     KC_TRNS, KC_TRNS, KC_TRNS, KC_MEDIA_PLAY_PAUSE, KC_TRNS, MO(_FN1_LAYER), MO(_FN2_LAYER), KC_TRNS
  ),
@@ -182,6 +183,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case GG_EZ:
             if (record->event.pressed)
                 SEND_STRING("gg ez");
+            break;
+        case ALT_Z:
+            if (record->event.pressed)
+                SEND_STRING(SS_LALT("z"));
             break;
         default:
             break;
