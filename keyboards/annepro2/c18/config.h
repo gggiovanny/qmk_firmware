@@ -168,3 +168,4 @@
 //#define NO_ACTION_FUNCTION
 
 #define TAPPING_TOGGLE 3
+#define TAPPING_TERM 175
