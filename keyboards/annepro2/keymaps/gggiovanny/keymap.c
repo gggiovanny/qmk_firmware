@@ -184,11 +184,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             if (record->event.pressed)
                 annepro2LedEnable();
             return false;
-        case KC_BRIGHTNESS_UP:
+        case KC_AP_BRIGHT_UP:
             if (record->event.pressed)
                 annepro2LedBrightUp();
             return false;
-        case KC_BRIGHTNESS_DOWN:
+        case KC_AP_BRIGHT_DOWN:
             if (record->event.pressed)
                 annepro2LedBrightDown();
             return false;
