@@ -10,6 +10,8 @@ enum anne_pro_layers {
 enum custom_keys {
     KC_AP_LED_ON = AP2_SAFE_RANGE,
     KC_AP_LED_OFF,
+    KC_AP_BRIGHT_UP,
+    KC_AP_BRIGHT_DOWN,
     GG_END_SEMICOLON,
     CTL_LEFT,
     CTL_RIGHT,
@@ -89,7 +91,7 @@ qk_tap_dance_action_t tap_dance_actions[] = {
   /*
   * Layer _FN2_LAYER
   * ,-----------------------------------------------------------------------------------------.
-  * |  ~  | BT1 | BT2 | BT3 | BT4 |NLOCK|  F6 |  F7 |LEDOF|LEDON| F10 | F11 | F12 |    Bksp   |
+  * |  ~  | BT1 | BT2 | BT3 | BT4 |NLOCK|  F6 |  F7 |LEDOF|LEDON| F10 |LEDDW|LEDUP|    Bksp   |
   * |-----------------------------------------------------------------------------------------+
   * | FN2    |  q  | UP  |  e  |  r  |  t  |  y  |  u  |  UP |  o  | PS | HOME | END |   \    |
   * |-----------------------------------------------------------------------------------------+
@@ -102,7 +104,7 @@ qk_tap_dance_action_t tap_dance_actions[] = {
   *
   */
  [_FN2_LAYER] = KEYMAP( /* Base */
-    KC_TRNS, KC_AP2_BT1, KC_AP2_BT2, KC_AP2_BT3, KC_AP2_BT4, KC_NUMLOCK, KC_TRNS, KC_TRNS, KC_AP_LED_OFF, KC_AP_LED_ON, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+    KC_TRNS, KC_AP2_BT1, KC_AP2_BT2, KC_AP2_BT3, KC_AP2_BT4, KC_NUMLOCK, KC_TRNS, KC_TRNS, KC_AP_LED_OFF, KC_AP_LED_ON, KC_TRNS, KC_AP_BRIGHT_DOWN, KC_AP_BRIGHT_UP, KC_TRNS,
     MO(_FN2_LAYER), KC_TRNS, KC_UP, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_UP, KC_TRNS, KC_PSCR, KC_HOME, KC_END, KC_TRNS,
     KC_CAPS, KC_LEFT, KC_DOWN, KC_RGHT, KC_TRNS, GG_EZ, KC_TRNS, KC_LEFT, KC_DOWN, KC_RGHT, KC_PGUP, KC_PGDN, KC_TRNS,
     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_MEDIA_PREV_TRACK, KC_VOLD, KC_VOLU, KC_MEDIA_NEXT_TRACK, KC_INS, KC_DEL, KC_TRNS,
@@ -181,6 +183,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case KC_AP_LED_ON:
             if (record->event.pressed)
                 annepro2LedEnable();
+            return false;
+        case KC_BRIGHTNESS_UP:
+            if (record->event.pressed)
+                annepro2LedBrightUp();
+            return false;
+        case KC_BRIGHTNESS_DOWN:
+            if (record->event.pressed)
+                annepro2LedBrightDown();
             return false;
         case GG_END_SEMICOLON:
             if (record->event.pressed)

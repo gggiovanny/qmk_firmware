@@ -84,6 +84,16 @@ void annepro2LedLayerOff(void)
     sdPut(&SD0, CMD_LAYER_OFF);
 }
 
+void annepro2LedBrightUp(void)
+{
+    sdPut(&SD0, CMD_BRIGHT_UP);
+}
+
+void annepro2LedBrightDown(void)
+{
+    sdPut(&SD0, CMD_BRIGHT_DOWN);
+}
+
 /*!
  * @returns false   processing for this keycode has been completed.
  */

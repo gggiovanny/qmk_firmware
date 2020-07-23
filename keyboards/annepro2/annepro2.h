@@ -39,3 +39,5 @@ void annepro2LedUpdate(uint8_t row, uint8_t col);
 void annepro2LedUpdateRow(uint8_t row);
 void annepro2LedLayerOn(uint8_t layerNum);
 void annepro2LedLayerOff(void);
+void annepro2LedBrightUp(void);
+void annepro2LedBrightDown(void);
