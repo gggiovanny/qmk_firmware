@@ -13,10 +13,7 @@ enum custom_keys {
     KC_AP_BRIGHT_UP,
     KC_AP_BRIGHT_DOWN,
     GG_END_SEMICOLON,
-    CTL_LEFT,
-    CTL_RIGHT,
     GG_EZ,
-    ALT_Z,
 };
 
 /*tap dance declarations */
@@ -29,10 +26,10 @@ enum {
   TD_SLSH_ASTR,
   TD_SPC_UNDS,
   TD_SCLN_BSPC,
-  TD_J_LEFT,
-  TD_L_RIGHT,
-  TD_I_UP,
-  TD_K_DOWN,
+  TD_J_CLEFT,
+  TD_L_CRIGHT,
+  TD_I_CUP,
+  TD_K_CDOWN,
 };
 
 /*tap dance definitions*/
@@ -46,10 +43,10 @@ qk_tap_dance_action_t tap_dance_actions[] = {
   [TD_SLSH_ASTR] = ACTION_TAP_DANCE_DOUBLE(KC_SLSH, KC_ASTR),
   [TD_SPC_UNDS] = ACTION_TAP_DANCE_DOUBLE(KC_SPC, KC_UNDS),
   [TD_SCLN_BSPC] = ACTION_TAP_DANCE_DOUBLE(KC_SCLN, KC_BSPC),
-  [TD_J_LEFT] = ACTION_TAP_DANCE_DOUBLE(KC_J, KC_LEFT),
-  [TD_L_RIGHT] = ACTION_TAP_DANCE_DOUBLE(KC_L, KC_RIGHT),
-  [TD_I_UP] = ACTION_TAP_DANCE_DOUBLE(KC_I, KC_UP),
-  [TD_K_DOWN] = ACTION_TAP_DANCE_DOUBLE(KC_K, KC_DOWN),
+  [TD_J_CLEFT] = ACTION_TAP_DANCE_DOUBLE(KC_J, LCTL(KC_LEFT)),
+  [TD_L_CRIGHT] = ACTION_TAP_DANCE_DOUBLE(KC_L, LCTL(KC_RIGHT)),
+  [TD_I_CUP] = ACTION_TAP_DANCE_DOUBLE(KC_I, LCTL(KC_UP)),
+  [TD_K_CDOWN] = ACTION_TAP_DANCE_DOUBLE(KC_K, LCTL(KC_DOWN)),
 };
 
 /*
@@ -81,8 +78,8 @@ qk_tap_dance_action_t tap_dance_actions[] = {
  const uint16_t keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  [_BASE_LAYER] = KEYMAP( /* Base */
     KC_GESC, KC_1, KC_2, KC_3, KC_4, KC_5, KC_6, KC_7, KC_8, KC_9, KC_0, KC_MINS, KC_EQL, KC_BSPC,
-    TD(TD_CTL_TAB), KC_Q, KC_W, KC_E, KC_R, KC_T, KC_Y, KC_U, TD(TD_I_UP), KC_O, TD(TD_P_PSCR), TD(TD_LBRC_HOME), TD(TD_RBRC_END), KC_BSLS,
-    TT(_FN1_LAYER), KC_A, KC_S, KC_D, KC_F, KC_G, KC_H, TD(TD_J_LEFT), TD(TD_K_DOWN), TD(TD_L_RIGHT), TD(TD_SCLN_BSPC), KC_QUOT, KC_ENT,
+    TD(TD_CTL_TAB), KC_Q, KC_W, KC_E, KC_R, KC_T, KC_Y, KC_U, TD(TD_I_CUP), KC_O, TD(TD_P_PSCR), TD(TD_LBRC_HOME), TD(TD_RBRC_END), KC_BSLS,
+    TT(_FN1_LAYER), KC_A, KC_S, KC_D, KC_F, KC_G, KC_H, TD(TD_J_CLEFT), TD(TD_K_CDOWN), TD(TD_L_CRIGHT), TD(TD_SCLN_BSPC), KC_QUOT, KC_ENT,
     TD(TD_LSFT_CAPS), KC_Z, KC_X, KC_C, KC_V, KC_B, KC_N, KC_M, KC_COMM, KC_DOT, TD(TD_SLSH_ASTR), RSFT_T(KC_UP),
     KC_LCTL, KC_LGUI, KC_LALT, TD(TD_SPC_UNDS), RALT_T(KC_DEL), LT(_FN1_LAYER,KC_LEFT), LT(_FN2_LAYER,KC_DOWN), RCTL_T(KC_RGHT)
 ),
@@ -93,7 +90,7 @@ qk_tap_dance_action_t tap_dance_actions[] = {
   * |-----------------------------------------------------------------------------------------+
   * | KEYPADL|  q  | UP  |  e  |  r  |  t  |  y  |  u  |  UP |  o  | PS | HOME | END |   \    |
   * |-----------------------------------------------------------------------------------------+
-  * | FN1     |LEFT |DOWN |RIGHT|ALT_Z|  g  |  h  | LEFT|DOWN |RIGHT| PGUP|PGDN |END+SEMICOLON|
+  * | FN1     |LEFT |DOWN |RIGHT|ALT Z|  g  |  h  | LEFT|DOWN |RIGHT| PGUP|PGDN |END+SEMICOLON|
   * |-----------------------------------------------------------------------------------------+
   * | Shift      |V-UP |V-DWN|MUTE |  v  |  b  |  n  |  m  |  ,  |INSRT| DEL |    Shift       |
   * |-----------------------------------------------------------------------------------------+
@@ -103,8 +100,8 @@ qk_tap_dance_action_t tap_dance_actions[] = {
   */
  [_FN1_LAYER] = KEYMAP( /* Base */
     KC_GRV, KC_F1, KC_F2, KC_F3, KC_F4, KC_F5, KC_F6, KC_F7, KC_F8, KC_F9, KC_F10, KC_F11, KC_F12, KC_DEL,
-    TT(_KEYPAD), KC_TRNS, KC_UP, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_UP, KC_TRNS, KC_PSCR, KC_HOME, KC_END, KC_TRNS,
-    KC_TRNS, KC_LEFT, KC_DOWN, KC_RGHT, ALT_Z, KC_TRNS, KC_TRNS, CTL_LEFT, KC_DOWN, CTL_RIGHT, KC_PGUP, KC_PGDN, GG_END_SEMICOLON,
+    TT(_KEYPAD), KC_TRNS, KC_UP, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, LCTL(KC_UP), KC_TRNS, KC_PSCR, KC_HOME, KC_END, KC_TRNS,
+    KC_TRNS, KC_LEFT, KC_DOWN, KC_RGHT, LALT(KC_Z), KC_TRNS, KC_TRNS, LCTL(KC_LEFT), LCTL(KC_DOWN), LCTL(KC_RIGHT), KC_PGUP, KC_PGDN, GG_END_SEMICOLON,
     KC_TRNS, KC_VOLU, KC_VOLD, KC_MUTE, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_INS, KC_DEL, KC_TRNS,
     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, MO(_FN2_LAYER), KC_TRNS
 ),
@@ -216,21 +213,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             if (record->event.pressed)
                 SEND_STRING(SS_TAP(X_END)";");
             break;
-        case CTL_LEFT:
-            if (record->event.pressed)
-                SEND_STRING(SS_DOWN(X_LCTL) SS_TAP(X_LEFT) SS_UP(X_LCTL));
-            break;
-        case CTL_RIGHT:
-            if (record->event.pressed)
-                SEND_STRING(SS_DOWN(X_LCTL) SS_TAP(X_RIGHT) SS_UP(X_LCTL));
-            break;
         case GG_EZ:
             if (record->event.pressed)
                 SEND_STRING("gg ez");
-            break;
-        case ALT_Z:
-            if (record->event.pressed)
-                SEND_STRING(SS_LALT("z"));
             break;
         default:
             break;
